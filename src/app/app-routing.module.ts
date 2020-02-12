@@ -8,6 +8,8 @@ import { ContactsComponent } from './contacts/contacts.component';
 import { NewsComponent } from './news/news/news.component';
 import { ConfiguratorComponent } from './configurator/configurator/configurator.component';
 import { ProfileComponent } from './user/profile/profile.component';
+import { AuthGuard } from './auth.guard';
+import { NotFoundComponent } from './not-found/not-found.component';
 
 
 const routes: Routes = [
@@ -23,13 +25,19 @@ const routes: Routes = [
   },
   {
     path: 'login',
-    pathMatch: 'full',
-    component: LoginComponent
+    component: LoginComponent,
+    canActivate: [AuthGuard],
+    data: {
+      isLogged: false
+    }
   },
   {
     path: 'register',
-    pathMatch: 'full',
-    component: RegisterComponent
+    component: RegisterComponent,
+    canActivate: [AuthGuard],
+    data: {
+      isLogged: false
+    }
   },
   {
     path: 'aboutus',
@@ -55,6 +63,10 @@ const routes: Routes = [
     path: 'profile',
     pathMatch: 'full',
     component: ProfileComponent
+  },
+  {
+    path: '*',
+    component: NotFoundComponent
   }
 ];
 

@@ -28,16 +28,16 @@
         <a class="nav-link h4" routerLink="/contacts">Контакти</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link h4" routerLink="/login">Вход</a>
+        <a *ngIf="!isLogged" class="nav-link h4" routerLink="/login">Вход</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link h4" routerLink="/register">Регистрация</a>
+        <a *ngIf="!isLogged" class="nav-link h4" routerLink="/register">Регистрация</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link h4" routerLink="/profile">Профил</a>
+        <a *ngIf="isLogged" class="nav-link h4" routerLink="/profile">Профил</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link h4" routerLink="/logout">Изход</a>
+        <a *ngIf="isLogged" class="nav-link h4" (click)="logout()">Изход</a>
       </li>
     </ul>
   </nav>
