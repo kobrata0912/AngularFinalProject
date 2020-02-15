@@ -6,40 +6,77 @@
 
 			<form #loginForm="ngForm" (ngSubmit)="handleLogin(loginForm.value)">
 				<div class="form-group">
-					<label for="email" class="h4">Мейл</label>
-          <input 
-          #emailInput="ngModel" 
-          ngModel 
-          type="text" 
-          name="email" 
-          class="form-control" 
-          id="username" 
-          [pattern]="emailRegex"
-          [ngClass]="{ 'is-invalid': emailInput.invalid && emailInput.touched, 'is-valid': emailInput.valid}"
-          required>
-        </div>
-        <div class="alert alert-danger alert-dismissible fade show" *ngIf="emailInput.touched && emailInput.invalid" >Please enter a valid email!</div>
+					<label for="email" class="h4">Имейл</label>
+					<input
+						#emailInput="ngModel"
+						ngModel
+						name="email"
+						placeholder="Valid GMAIL account"
+						type="text"
+						class="form-control"
+						id="email"
+						[pattern]="emailRegex"
+						[ngClass]="{
+							'is-invalid': emailInput.invalid && emailInput.touched,
+							'is-valid': emailInput.valid
+						}"
+						autocomplete="off"
+						required
+					/>
+				</div>
+				<div
+					class="alert alert-danger alert-dismissible fade show"
+					*ngIf="emailInput.dirty && emailInput.invalid"
+				>
+					Моля, въведете валиден Gmail имейл!
+				</div>
 
 				<div class="form-group">
 					<label for="password" class="h4">Парола</label>
-          <input
-          #passwordInput="ngModel"
-          ngModel
-          name="password"
-          placeholder="Password lenght > 8"
-					type="password"
-					class="form-control"
-          id="password"
-          [pattern]="passwordRegex"
-          [ngClass]="{ 'is-invalid': passwordInput.invalid && passwordInput.touched, 'is-valid': passwordInput.valid}"
-          required>
-        </div>
-        <div class="alert alert-danger alert-dismissible fade show" *ngIf="passwordInput.touched && passwordInput.invalid">
-          Please enter a valid password!</div>
+					<input
+						#passwordInput="ngModel"
+						ngModel
+						name="password"
+						placeholder="Password > 8 characters"
+						type="password"
+						class="form-control"
+						id="password"
+						[pattern]="passwordRegex"
+						[ngClass]="{
+							'is-invalid': passwordInput.invalid && passwordInput.touched,
+							'is-valid': passwordInput.valid
+						}"
+						required
+					/>
+				</div>
+				<div
+					class="alert alert-danger alert-dismissible fade show"
+					*ngIf="passwordInput.dirty && passwordInput.invalid"
+				>
+					Моля, въведете валидна парола!
+				</div>
 
-				<button [disabled]="loginForm.invalid" class="btn btn-primary"><h5>Вход</h5></button>
+				<button [disabled]="loginForm.invalid" class="btn btn-primary">
+					<h5>Вход</h5>
+				</button>
 			</form>
-			<div class="row"></div>
+			<div class="row">
+				<div class="container" *ngIf="loading">
+					<div class="row">
+						<div id="loader">
+							<div class="dot"></div>
+							<div class="dot"></div>
+							<div class="dot"></div>
+							<div class="dot"></div>
+							<div class="dot"></div>
+							<div class="dot"></div>
+							<div class="dot"></div>
+							<div class="dot"></div>
+							<div class="loading"></div>
+						</div>
+					</div>
+				</div>
+			</div>
 		</div>
 		<div class="col-sm"></div>
 	</div>

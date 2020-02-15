@@ -5,7 +5,8 @@ import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { environment } from '../environments/environment';
-
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastrModule } from 'ngx-toastr';
 import { AppRoutingModule } from './app-routing.module';
 import { FormsModule } from '@angular/forms';
 import { CoreModule } from './core/core.module';
@@ -16,6 +17,7 @@ import { NotFoundComponent } from './not-found/not-found.component';
 import { HomeComponent } from './home/home.component';
 import { AboutUsComponent } from './about-us/about-us.component';
 import { ContactsComponent } from './contacts/contacts.component';
+import { SharedModule } from './shared/shared.module';
 
 @NgModule({
 	declarations: [
@@ -30,12 +32,19 @@ import { ContactsComponent } from './contacts/contacts.component';
 	imports: [
 		BrowserModule,
 		AppRoutingModule,
+		SharedModule,
 		CoreModule,
 		HttpClientModule,
 		FormsModule,
 		AngularFireModule.initializeApp(environment.firebase),
 		AngularFirestoreModule,
-		AngularFireAuthModule
+		AngularFireAuthModule,
+		BrowserAnimationsModule,
+		ToastrModule.forRoot({
+			timeOut: 3000,
+			positionClass: 'toast-bottom-right',
+			preventDuplicates: true
+		})
 	],
 	providers: [],
 	bootstrap: [AppComponent]

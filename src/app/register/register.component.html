@@ -1,105 +1,173 @@
 <div class="container pt-5">
-    <div class="row">
-      <div class="col">
-      </div>
-      <div class="col-8 border shadow-lg p-3 mb-5 bg-white rounded">
-        <form>
-            <div class="row">
-                <div class="col">
-                  <label for="exampleInputFirstName" class="h4">Име</label>
-                  <input type="text" class="form-control" id="exampleInputFirstName">
-                </div>
-                <div class="col">
-                  <label for="exampleInputLastName" class="h4">Фамилия</label>
-                  <input type="text" class="form-control" id="exampleInputLastName">
-                </div>
-              </div>
+	<div class="row">
+		<div class="col"></div>
+		<div class="col-8 border shadow-lg p-3 mb-5 bg-white rounded">
+			<form
+				#registerForm="ngForm"
+        (ngSubmit)="handleRegister(registerForm.value)"
+        >
+				<div class="row">
+					<div class="col">
+						<label for="firstName" class="h4">Име</label>
+						<input
+							#firstNameInput="ngModel"
+							ngModel
+							name="firstName"
+							type="text"
+							class="form-control"
+							id="firstName"
+							[pattern]="namesRegex"
+							[ngClass]="{
+								'is-invalid': firstNameInput.invalid && firstNameInput.touched,
+								'is-valid': firstNameInput.valid
+							}"
+							autocomplete="off"
+							required
+						/>
+					</div>
 
-            <div class="form-group">
-              <label for="exampleInputEmail1" class="h4">Потребителско име</label>
-              <input type="email" class="form-control is-valid" id="exampleInputEmail1" aria-describedby="emailHelp">
-            </div>
-            <div class="form-group">
-              <label for="exampleInputPassword1" class="h4">Парола</label>
-              <input type="password" class="form-control" id="exampleInputPassword1">
-            </div>
-            <div class="form-group">
-              <label for="exampleInputRePassword1" class="h4">Повторна парола</label>
-              <input type="rePassword" class="form-control" id="exampleInputRePassword1">
-            </div>
-            <button class="btn btn-primary"><h5>Вход</h5></button>
-          </form>
-          <div class="row"></div>
+					<div class="col">
+						<label for="lastName" class="h4">Фамилия</label>
+						<input
+							#lastNameInput="ngModel"
+							ngModel
+							name="lastName"
+							type="text"
+							class="form-control"
+							id="lastName"
+							[pattern]="namesRegex"
+							[ngClass]="{
+								'is-invalid': lastNameInput.invalid && lastNameInput.touched,
+								'is-valid': lastNameInput.valid
+							}"
+							autocomplete="off"
+							required
+						/>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col mt-3">
+						<div
+							class="alert alert-danger alert-dismissible fade show"
+							*ngIf="firstNameInput.dirty && firstNameInput.invalid"
+						>
+							Моля, въведете валидно име!
+						</div>
+					</div>
+					<div class="col mt-3">
+						<div
+							class="alert alert-danger alert-dismissible fade show"
+							*ngIf="lastNameInput.dirty && lastNameInput.invalid"
+						>
+							Моля, въведете валидна фамилия!
+						</div>
+					</div>
+				</div>
+
+				<div class="form-group">
+					<label for="email" class="h4">Имейл</label>
+					<input
+						#emailInput="ngModel"
+						ngModel
+						name="email"
+						placeholder="Valid GMAIL account"
+						type="text"
+						class="form-control"
+						id="email"
+						[pattern]="emailRegex"
+						[ngClass]="{
+							'is-invalid': emailInput.invalid && emailInput.touched,
+							'is-valid': emailInput.valid
+						}"
+						autocomplete="off"
+						required
+					/>
+				</div>
+				<div
+					class="alert alert-danger alert-dismissible fade show"
+					*ngIf="emailInput.dirty && emailInput.invalid"
+				>
+					Моля, въведете валиден Gmail имейл!
+				</div>
+				<div
+					#passwordsGroup="ngModelGroup"
+					ngModelGroup="passwords"
+					appPasswordMatch
+				>
+					<div class="form-group">
+						<label for="password" class="h4">Парола</label>
+						<input
+							#passwordInput="ngModel"
+							ngModel
+							name="password"
+							placeholder="Password > 8 characters"
+							type="password"
+							class="form-control"
+              id="password"
+              [pattern]="passwordRegex"
+							[ngClass]="{
+								'is-invalid': passwordInput.invalid && passwordInput.touched,
+								'is-valid': passwordInput.valid
+							}"
+              required
+              minlength='8'
+						/>
+          </div>
+          <div
+						class="alert alert-danger alert-dismissible fade show"
+						*ngIf="passwordInput.dirty && passwordInput.invalid"
+					>
+						Моля, въведете валидна парола!
+					</div>
+					<div class="form-group">
+						<label for="rePassword" class="h4">Повторна парола</label>
+						<input
+							#rePasswordInput="ngModel"
+							ngModel
+							name="rePassword"
+							placeholder="Password > 8 characters"
+							type="password"
+							class="form-control"
+							id="rePassword"
+							[ngClass]="{
+								'is-invalid': passwordsGroup.invalid && passwordsGroup.dirty,
+								'is-valid': passwordsGroup.valid
+							}"
+              required
+              minlength='8'
+						/>
+					</div>
+					<div
+						class="alert alert-danger alert-dismissible fade show"
+						*ngIf="passwordsGroup.touched && passwordsGroup.invalid"
+					>
+						Двете пароли не съвпадат!
+					</div>
+				</div>
+				<button [disabled]="registerForm.invalid" class="btn btn-primary">
+					<h5>Регистрация</h5>
+				</button>
+			</form>
+			<div class="row">
+        <div class="container" *ngIf="loading">
+					<div class="row">
+						<div id="loader">
+							<div class="dot"></div>
+							<div class="dot"></div>
+							<div class="dot"></div>
+							<div class="dot"></div>
+							<div class="dot"></div>
+							<div class="dot"></div>
+							<div class="dot"></div>
+							<div class="dot"></div>
+							<div class="loading"></div>
+						</div>
+					</div>
+				</div>
       </div>
-      <div class="col">
-      </div>
-    </div>
-    </div>
-    <!-- <form>
-        <div class="form-row">
-          <div class="col-md-4 mb-3">
-            <label for="validationServer01">First name</label>
-            <input type="text" class="form-control is-valid" id="validationServer01" value="Mark" required>
-            <div class="valid-feedback">
-              Looks good!
-            </div>
-          </div>
-          <div class="col-md-4 mb-3">
-            <label for="validationServer02">Last name</label>
-            <input type="text" class="form-control is-valid" id="validationServer02" value="Otto" required>
-            <div class="valid-feedback">
-              Looks good!
-            </div>
-          </div>
-          <div class="col-md-4 mb-3">
-            <label for="validationServerUsername">Username</label>
-            <div class="input-group">
-              <div class="input-group-prepend">
-                <span class="input-group-text" id="inputGroupPrepend3">@</span>
-              </div>
-              <input type="text" class="form-control is-invalid" id="validationServerUsername" aria-describedby="inputGroupPrepend3" required>
-              <div class="invalid-feedback">
-                Please choose a username.
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="form-row">
-          <div class="col-md-6 mb-3">
-            <label for="validationServer03">City</label>
-            <input type="text" class="form-control is-invalid" id="validationServer03" required>
-            <div class="invalid-feedback">
-              Please provide a valid city.
-            </div>
-          </div>
-          <div class="col-md-3 mb-3">
-            <label for="validationServer04">State</label>
-            <select class="custom-select is-invalid" id="validationServer04" required>
-              <option selected disabled value="">Choose...</option>
-              <option>...</option>
-            </select>
-            <div class="invalid-feedback">
-              Please select a valid state.
-            </div>
-          </div>
-          <div class="col-md-3 mb-3">
-            <label for="validationServer05">Zip</label>
-            <input type="text" class="form-control is-invalid" id="validationServer05" required>
-            <div class="invalid-feedback">
-              Please provide a valid zip.
-            </div>
-          </div>
-        </div>
-        <div class="form-group">
-          <div class="form-check">
-            <input class="form-check-input is-invalid" type="checkbox" value="" id="invalidCheck3" required>
-            <label class="form-check-label" for="invalidCheck3">
-              Agree to terms and conditions
-            </label>
-            <div class="invalid-feedback">
-              You must agree before submitting.
-            </div>
-          </div>
-        </div>
-        <button class="btn btn-primary" type="submit">Submit form</button>
-      </form> -->
+		</div>
+		<div class="col">{{registerForm.value | json}}</div>
+	</div>
+</div>
+

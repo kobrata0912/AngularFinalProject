@@ -1,48 +1,52 @@
 import { Injectable } from '@angular/core';
-import 'rxjs/add/operator/toPromise';
 import { AngularFireAuth } from '@angular/fire/auth';
-import * as firebase from 'firebase/app';
+import { Router } from '@angular/router';
+import { User } from 'firebase';
 
-@Injectable()
+@Injectable({
+	providedIn: 'root'
+})
 export class AuthService {
-	constructor(public afAuth: AngularFireAuth) {}
-
-	doRegister(value) {
-		return new Promise<any>((resolve, reject) => {
-			firebase
-				.auth()
-				.createUserWithEmailAndPassword(value.email, value.password)
-				.then(
-					res => {
-						resolve(res);
-					},
-					err => reject(err)
-				);
-		});
-	}
-
-	doLogin(value) {
-		return new Promise<any>((resolve, reject) => {
-			firebase
-				.auth()
-				.signInWithEmailAndPassword(value.email, value.password)
-				.then(
-					res => {
-						resolve(res);
-					},
-					err => reject(err)
-				);
-		});
-	}
-
-	doLogout() {
-		return new Promise((resolve, reject) => {
-			if (firebase.auth().currentUser) {
-				this.afAuth.auth.signOut();
-				resolve();
+	user: User;
+	constructor(public afAuth: AngularFireAuth, public router: Router) {
+		this.afAuth.authState.subscribe(user => {
+			if (user) {
+				this.user = user;
+				localStorage.setItem('user', JSON.stringify(this.user));
 			} else {
-				reject();
+				localStorage.setItem('user', null);
 			}
 		});
+	}
+
+	async login(email: string, password: string) {
+		return await this.afAuth.auth.signInWithEmailAndPassword(email, password);
+	}
+
+	async register(email: string, password: string, displayName: string) {
+		return await this.afAuth.auth.createUserWithEmailAndPassword(email, password)
+		.then(async () => await this.login(email, password))
+		.then(async () => await this.user.updateProfile({
+            displayName: displayName
+          }))
+	}
+
+	async sendEmailVerification() {
+		return await this.afAuth.auth.currentUser.sendEmailVerification();
+	}
+
+	async sendPasswordResetEmail(passwordResetEmail: string) {
+		return await this.afAuth.auth.sendPasswordResetEmail(passwordResetEmail);
+	}
+
+	async logout() {
+		var result = await this.afAuth.auth.signOut();
+		localStorage.removeItem('user');
+		return result;
+	}
+
+	get isLoggedIn(): boolean {
+		const user = JSON.parse(localStorage.getItem('user'));
+		return user !== null;
 	}
 }

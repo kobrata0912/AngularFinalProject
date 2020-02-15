@@ -8,8 +8,6 @@ import { UserService } from './services/user.service';
 export class AuthGuard implements CanActivate {
   constructor(private userService: UserService) { }
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-    console.log(this.userService.isLogged);
-    console.log(route.data.isLogged);
     return this.userService.isLogged === route.data.isLogged;
   }
 }
