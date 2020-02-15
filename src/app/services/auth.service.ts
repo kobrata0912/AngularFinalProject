@@ -28,16 +28,17 @@ export class AuthService {
 		.then(async () => await this.login(email, password))
 		.then(async () => await this.user.updateProfile({
             displayName: displayName
-          }))
+		  }))
+		.then(() => this.user.displayName = displayName);
 	}
 
-	async sendEmailVerification() {
-		return await this.afAuth.auth.currentUser.sendEmailVerification();
-	}
+	// async sendEmailVerification() {
+	// 	return await this.afAuth.auth.currentUser.sendEmailVerification();
+	// }
 
-	async sendPasswordResetEmail(passwordResetEmail: string) {
-		return await this.afAuth.auth.sendPasswordResetEmail(passwordResetEmail);
-	}
+	// async sendPasswordResetEmail(passwordResetEmail: string) {
+	// 	return await this.afAuth.auth.sendPasswordResetEmail(passwordResetEmail);
+	// }
 
 	async logout() {
 		var result = await this.afAuth.auth.signOut();
