@@ -4,8 +4,8 @@
 		<div class="col-8 border shadow-lg p-3 mb-5 bg-white rounded">
 			<form
 				#registerForm="ngForm"
-        (ngSubmit)="handleRegister(registerForm.value)"
-        >
+				(ngSubmit)="handleRegister(registerForm.value)"
+			>
 				<div class="row">
 					<div class="col">
 						<label for="firstName" class="h4">Име</label>
@@ -104,17 +104,17 @@
 							placeholder="Password > 8 characters"
 							type="password"
 							class="form-control"
-              id="password"
-              [pattern]="passwordRegex"
+							id="password"
+							[pattern]="passwordRegex"
 							[ngClass]="{
 								'is-invalid': passwordInput.invalid && passwordInput.touched,
 								'is-valid': passwordInput.valid
 							}"
-              required
-              minlength='8'
+							required
+							minlength="8"
 						/>
-          </div>
-          <div
+					</div>
+					<div
 						class="alert alert-danger alert-dismissible fade show"
 						*ngIf="passwordInput.dirty && passwordInput.invalid"
 					>
@@ -134,8 +134,8 @@
 								'is-invalid': passwordsGroup.invalid && passwordsGroup.dirty,
 								'is-valid': passwordsGroup.valid
 							}"
-              required
-              minlength='8'
+							required
+							minlength="8"
 						/>
 					</div>
 					<div
@@ -150,7 +150,7 @@
 				</button>
 			</form>
 			<div class="row">
-        <div class="container" *ngIf="loading">
+				<div class="container" *ngIf="loading">
 					<div class="row">
 						<div id="loader">
 							<div class="dot"></div>
@@ -165,9 +165,8 @@
 						</div>
 					</div>
 				</div>
-      </div>
+			</div>
 		</div>
 		<div class="col"></div>
 	</div>
 </div>
-

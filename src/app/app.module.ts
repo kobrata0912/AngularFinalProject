@@ -18,6 +18,9 @@ import { HomeComponent } from './home/home.component';
 import { AboutUsComponent } from './about-us/about-us.component';
 import { ContactsComponent } from './contacts/contacts.component';
 import { SharedModule } from './shared/shared.module';
+import { RepairsComponent } from './repairs/repairs.component';
+import { UserModule } from './user/user.module';
+import { CarmodelsComponent } from './carmodels/carmodels.component';
 
 @NgModule({
 	declarations: [
@@ -27,13 +30,16 @@ import { SharedModule } from './shared/shared.module';
 		NotFoundComponent,
 		HomeComponent,
 		AboutUsComponent,
-		ContactsComponent
+		ContactsComponent,
+		RepairsComponent,
+		CarmodelsComponent
 	],
 	imports: [
 		BrowserModule,
 		AppRoutingModule,
 		SharedModule,
 		CoreModule,
+		UserModule,
 		HttpClientModule,
 		FormsModule,
 		AngularFireModule.initializeApp(environment.firebase),

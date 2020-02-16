@@ -10,68 +10,86 @@ import { ConfiguratorComponent } from './configurator/configurator/configurator.
 import { ProfileComponent } from './user/profile/profile.component';
 import { AuthGuard } from './auth.guard';
 import { NotFoundComponent } from './not-found/not-found.component';
-
+import { RepairsComponent } from './repairs/repairs.component';
+import { CarmodelsComponent } from './carmodels/carmodels.component';
 
 const routes: Routes = [
-  {
-    path: '',
-    pathMatch: 'full',
-    component: HomeComponent
-  },
-  {
-    path: 'home',
-    pathMatch: 'full',
-    component: HomeComponent
-  },
-  {
-    path: 'login',
-    component: LoginComponent,
-    canActivate: [AuthGuard],
-    data: {
-      isLogged: false
-    }
-  },
-  {
-    path: 'register',
-    component: RegisterComponent,
-    canActivate: [AuthGuard],
-    data: {
-      isLogged: false
-    }
-  },
-  {
-    path: 'aboutus',
-    pathMatch: 'full',
-    component: AboutUsComponent
-  },
-  {
-    path: 'contacts',
-    pathMatch: 'full',
-    component: ContactsComponent
-  },
-  {
-    path: 'news',
-    pathMatch: 'full',
-    component: NewsComponent
-  },
-  {
-    path: 'configurator',
-    pathMatch: 'full',
-    component: ConfiguratorComponent
-  },
-  {
-    path: 'profile',
-    pathMatch: 'full',
-    component: ProfileComponent
-  },
-  {
-    path: '*',
-    component: NotFoundComponent
-  }
+	{
+		path: '',
+		pathMatch: 'full',
+		component: HomeComponent
+	},
+	{
+		path: 'home',
+		pathMatch: 'full',
+		component: HomeComponent
+	},
+	{
+		path: 'login',
+		component: LoginComponent,
+		canActivate: [AuthGuard],
+		data: {
+			isLogged: false
+		}
+	},
+	{
+		path: 'register',
+		component: RegisterComponent,
+		canActivate: [AuthGuard],
+		data: {
+			isLogged: false
+		}
+	},
+	{
+		path: 'aboutus',
+		pathMatch: 'full',
+		component: AboutUsComponent
+	},
+	{
+		path: 'contacts',
+		pathMatch: 'full',
+		component: ContactsComponent
+	},
+	{
+		path: 'news',
+		pathMatch: 'full',
+		component: NewsComponent
+	},
+	{
+		path: 'configurator',
+		pathMatch: 'full',
+		component: ConfiguratorComponent,
+		canActivate: [AuthGuard],
+		data: {
+			isLogged: true
+		}
+	},
+	{
+		path: 'profile',
+		pathMatch: 'full',
+		component: ProfileComponent
+	},
+	{
+		path: 'repairs',
+		pathMatch: 'full',
+		component: RepairsComponent,
+		canActivate: [AuthGuard],
+		data: {
+			isLogged: true
+		}
+	},
+	{
+		path: 'carmodels',
+		component: CarmodelsComponent,
+	},
+	{
+		path: '*',
+		component: NotFoundComponent
+	}
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+	imports: [RouterModule.forRoot(routes)],
+	exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}
