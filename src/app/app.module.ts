@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { environment } from '../environments/environment';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -21,6 +22,7 @@ import { SharedModule } from './shared/shared.module';
 import { RepairsComponent } from './repairs/repairs.component';
 import { UserModule } from './user/user.module';
 import { CarmodelsComponent } from './carmodels/carmodels.component';
+import { NewsModule } from './news/news.module'
 
 @NgModule({
 	declarations: [
@@ -43,6 +45,7 @@ import { CarmodelsComponent } from './carmodels/carmodels.component';
 		HttpClientModule,
 		FormsModule,
 		AngularFireModule.initializeApp(environment.firebase),
+		AngularFireDatabaseModule,
 		AngularFirestoreModule,
 		AngularFireAuthModule,
 		BrowserAnimationsModule,
@@ -50,7 +53,8 @@ import { CarmodelsComponent } from './carmodels/carmodels.component';
 			timeOut: 3000,
 			positionClass: 'toast-bottom-right',
 			preventDuplicates: true
-		})
+		}),
+		NewsModule
 	],
 	providers: [],
 	bootstrap: [AppComponent]
