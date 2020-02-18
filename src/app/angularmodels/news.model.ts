@@ -1,5 +1,3 @@
-import { Timestamp } from 'rxjs/internal/operators/timestamp';
-
 export class News {
     id: string;
     date: {seconds: number, nanoseconds: number};

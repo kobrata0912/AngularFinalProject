@@ -11,18 +11,18 @@ import { ToastrModule } from 'ngx-toastr';
 import { AppRoutingModule } from './app-routing.module';
 import { FormsModule } from '@angular/forms';
 import { CoreModule } from './core/core.module';
+import { SharedModule } from './shared/shared.module';
+import { UserModule } from './user/user.module';
+import { NewsModule } from './news/news.module';
+import { CarmodelsModule } from './carmodels/carmodels.module';
 import { AppComponent } from './app.component';
+import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { NotFoundComponent } from './not-found/not-found.component';
-import { HomeComponent } from './home/home.component';
 import { AboutUsComponent } from './about-us/about-us.component';
 import { ContactsComponent } from './contacts/contacts.component';
-import { SharedModule } from './shared/shared.module';
 import { RepairsComponent } from './repairs/repairs.component';
-import { UserModule } from './user/user.module';
-import { CarmodelsComponent } from './carmodels/carmodels.component';
-import { NewsModule } from './news/news.module'
 
 @NgModule({
 	declarations: [
@@ -33,8 +33,7 @@ import { NewsModule } from './news/news.module'
 		HomeComponent,
 		AboutUsComponent,
 		ContactsComponent,
-		RepairsComponent,
-		CarmodelsComponent
+		RepairsComponent
 	],
 	imports: [
 		BrowserModule,
@@ -54,7 +53,8 @@ import { NewsModule } from './news/news.module'
 			positionClass: 'toast-bottom-right',
 			preventDuplicates: true
 		}),
-		NewsModule
+		NewsModule,
+		CarmodelsModule
 	],
 	providers: [],
 	bootstrap: [AppComponent]

@@ -20,14 +20,9 @@ export class NewsComponent implements OnInit {
     this.newsService.getNews().subscribe(data => {
       this.loading = false;
       this.news = data.map(e => {
-        
         return {
-          id: e.payload.doc.id,
-          date: e.payload.doc.get('date'),
-          title: e.payload.doc.get('title'),
-          description: e.payload.doc.get('description'),
-          pictures: e.payload.doc.get('pictures')
-        } as News;
+          ...e.payload.doc.data() as News
+        }
       })
     });
   }

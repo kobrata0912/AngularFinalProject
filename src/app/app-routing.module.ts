@@ -11,7 +11,8 @@ import { ProfileComponent } from './user/profile/profile.component';
 import { AuthGuard } from './auth.guard';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { RepairsComponent } from './repairs/repairs.component';
-import { CarmodelsComponent } from './carmodels/carmodels.component';
+import { CarlistComponent } from './carmodels/carlist/carlist.component';
+import { NgModel } from '@angular/forms';
 
 const routes: Routes = [
 	{
@@ -79,8 +80,8 @@ const routes: Routes = [
 		}
 	},
 	{
-		path: 'carmodels',
-		component: CarmodelsComponent,
+		path: 'models/:modelName',
+		component: CarlistComponent
 	},
 	{
 		path: '*',
