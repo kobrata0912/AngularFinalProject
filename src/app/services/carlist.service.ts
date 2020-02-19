@@ -15,4 +15,8 @@ export class CarlistService{
 		return this.firestore.collection('cars', ref => ref.where('modelName', '==', carModel)).snapshotChanges();
   }
 
+  getCarModels() {
+    return this.firestore.collection('cars', ref => ref.orderBy("modelName", "asc")).snapshotChanges();
+  }
+
 }

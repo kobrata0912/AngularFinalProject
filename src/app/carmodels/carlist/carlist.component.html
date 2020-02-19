@@ -1,34 +1,37 @@
 <ng-template ngFor let-model [ngForOf]="car">
 	<div id="carModel" class="carousel slide" data-ride="carousel">
-		<!-- Indicators -->
-		<ul class="carousel-indicators">
-			<li data-target="#carModel" data-slide-to="0" class="active"></li>
-			<li data-target="#carModel" data-slide-to="1"></li>
-			<li data-target="#carModel" data-slide-to="2"></li>
-			<li data-target="#carModel" data-slide-to="3"></li>
-			<li data-target="#carModel" data-slide-to="4"></li>
-		</ul>
 
 		<!-- The slideshow -->
 		<div class="carousel-inner">
-			<div class="carousel-item active">
-				<img
-					class="mx-auto d-block"
-					src="../../assets/models/q2/1.jpg"
-					width="2000px"
-					height="563px"
-					alt="Audi Q2"
-				/>
-			</div>
-			<div class="carousel-item">
-				<img
-					class="mx-auto d-block"
-					src="../../assets/models/q3/1.jpg"
-					width="2000px"
-					height="563px"
-					alt="Audi Q3"
-				/>
-			</div>
+			<ng-template
+			ngFor
+			let-picture
+			[ngForOf]="model.pictures"
+			let-i="index"
+		>
+			<ng-template [ngIf]="i === 0">
+				<div class="carousel-item active">
+					<img
+						class="d-block mx-auto"
+						src="{{ picture }}"
+						width="2000px"
+						height="563px"
+						alt="{{model.modelName}}"
+					/>
+				</div>
+			</ng-template>
+			<ng-template [ngIf]="i > 0">
+				<div class="carousel-item">
+					<img
+						class="d-block mx-auto"
+						src="{{ picture }}"
+						width="2000px"
+						height="563px"
+						alt="{{model.modelName}}"
+					/>
+				</div>
+			</ng-template>
+		</ng-template>
 		</div>
 
 		<!-- Left and right controls -->
@@ -196,12 +199,11 @@
 				</div>
 				<div class="tab-pane container fade col-12 border" id="priceList">
 					<h1 class="display-3 justify-content-center d-flex">
-						Ценова листа.
+						{{model.pricelist.priceListHeader}}
 					</h1>
 					<h3>
 						<small>
-							Вземете решение, когато сте добре информирани. Разгледайте
-							ценовата листа в PDF формат.
+							{{model.pricelist.priceListDescription}}
 						</small>
 					</h3>
 					<h3>

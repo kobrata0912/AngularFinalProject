@@ -21,6 +21,7 @@ export class NewsComponent implements OnInit {
       this.loading = false;
       this.news = data.map(e => {
         return {
+          id: e.payload.doc.id,
           ...e.payload.doc.data() as News
         }
       })

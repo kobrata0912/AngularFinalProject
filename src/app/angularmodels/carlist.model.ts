@@ -2,6 +2,8 @@ export class Car {
 	modelName: string;
 	pricelist: {
 		priceListUrl: string;
+		priceListHeader: string;
+		priceListDescription: string;
 	};
 	dimensions: {
 		frontAndBackView: string;
@@ -48,4 +50,7 @@ export class Car {
 			}
 		];
 	};
+	pictures: [
+		string
+	]
 }

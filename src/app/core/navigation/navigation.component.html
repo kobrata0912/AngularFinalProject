@@ -14,11 +14,11 @@
 				Модели
 			</a>
 			<div class="dropdown-menu">
-				<a class="dropdown-item" [routerLink]="[ '/models', 'Q2' ]">Q2</a>
-				<a class="dropdown-item" [routerLink]="[ '/models', 'Q3']">Q3</a>
-				<a class="dropdown-item" [routerLink]="[ '/models', 'Q5']">Q5</a>
-				<a class="dropdown-item" [routerLink]="[ '/models', 'Q7']">Q7</a>
-				<a class="dropdown-item" [routerLink]="[ '/models', 'RSQ8']">RSQ8</a>
+				<ng-template ngFor let-model [ngForOf]="carModels">
+					<a class="dropdown-item" [routerLink]="['/models', model]">{{
+						model
+					}}</a>
+				</ng-template>
 			</div>
 		</li>
 		<li class="nav-item mx-1 shadow">
