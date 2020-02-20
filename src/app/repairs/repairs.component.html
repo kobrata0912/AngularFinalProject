@@ -14,18 +14,43 @@
 		</span>
 	</div>
 </div>
+
 <div class="row justify-content-center">
 	<div class="col-8 m-5 justify-content-center d-flex ">
+		<div class="container mt-5" *ngIf="loading; else inputForm">
+			<div class="row">
+				<div id="loader">
+					<div class="dot"></div>
+					<div class="dot"></div>
+					<div class="dot"></div>
+					<div class="dot"></div>
+					<div class="dot"></div>
+					<div class="dot"></div>
+					<div class="dot"></div>
+					<div class="dot"></div>
+					<div class="loading"></div>
+				</div>
+			</div>
+		</div>
+		<ng-template #inputForm>
 		<div class="container">
-			<form class="shadow-lg p-5">
+			<form
+				#repairForm="ngForm"
+				(ngSubmit)="submitHandler(repairForm.value)"
+				class="shadow-lg p-5"
+			>
 				<div class="form-group row">
 					<label for="fullName" class="col-sm-2 col-form-label"> Имена </label>
 					<div class="col-sm-10">
 						<input
+							#fullNameInput="ngModel"
+							ngModel
+							name="fullName"
 							type="text"
 							class="form-control"
 							id="fullName"
-							placeholder="fullName names"
+							value="{{ this.fullNames }}"
+							placeholder="{{ this.fullNames }}"
 							disabled
 						/>
 					</div>
@@ -34,32 +59,66 @@
 					<label for="email" class="col-sm-2 col-form-label"> Имейл </label>
 					<div class="col-sm-10">
 						<input
-							type="email"
+							#emailInput="ngModel"
+							ngModel
+							name="email"
+							type="text"
 							class="form-control"
 							id="email"
-							value="email ot baza danni"
+							value="{{ this.userEmail }}"
+							placeholder="{{ this.userEmail }}"
+							disabled
 						/>
 					</div>
 				</div>
 				<div class="form-group row">
-					<label for="phoneNumber" class="col-sm-2 col-form-label"> Телефон </label>
+					<label for="phoneNumber" class="col-sm-2 col-form-label">
+						Телефон
+					</label>
 					<div class="col-sm-10">
 						<input
+							#phoneNumberInput="ngModel"
+							ngModel
+							name="phoneNumber"
 							type="text"
 							class="form-control"
 							id="phoneNumber"
+							[pattern]="phoneNumberRegex"
 							placeholder="Моля, напишете телефон за обратна връзка"
+							[ngClass]="{
+								'is-invalid':
+									phoneNumberInput.invalid && phoneNumberInput.touched,
+								'is-valid': phoneNumberInput.valid
+							}"
+							required
 						/>
 					</div>
 				</div>
 				<div class="form-group row">
 					<label for="location" class="col-sm-2 col-form-label">Сервиз</label>
 					<div class="col-sm-10">
-						<select class="custom-select mr-sm-2" id="inlineFormCustomSelect">
-							<option selected>Изберете сервиз...</option>
-							<option value="1">Сервиз Едно</option>
-							<option value="2">Сервиз Две</option>
-							<option value="3">Сервиз Три</option>
+						<select
+							#locationInput="ngModel"
+							ngModel
+							name="location"
+							class="custom-select mr-sm-2"
+							id="inlineFormCustomSelect"
+							required
+							[ngClass]="{
+								'is-invalid': locationInput.invalid && locationInput.dirty,
+								'is-valid': locationInput.valid
+							}"
+						>
+							<option value="" disabled>Изберете сервиз...</option>
+							<option value="ПОРШЕ СОФИЯ ЗАПАД">ПОРШЕ СОФИЯ ЗАПАД</option>
+							<option value="ПОРШЕ СОФИЯ ИЗТОК">ПОРШЕ СОФИЯ ИЗТОК</option>
+							<option value="ПОРШЕ ПЛОВДИВ">ПОРШЕ ПЛОВДИВ</option>
+							<option value="ПОРШЕ ВАРНА">ПОРШЕ ВАРНА</option>
+							<option value="АВТОХИТ 2000">АВТОХИТ 2000</option>
+							<option value="ВЕСТАУТО - М">ВЕСТАУТО - М</option>
+							<option value="АВТОТЕХНИКА - ПМ ЕООД">АВТОТЕХНИКА - ПМ ЕООД</option>
+							<option value="ХОБИ КАР ЕООД">ХОБИ КАР ЕООД</option>
+							<option value="АВТОЧОЙС">АВТОЧОЙС</option>
 						</select>
 					</div>
 				</div>
@@ -70,23 +129,39 @@
 						>
 						<div class="col-sm-10">
 							<textarea
+								#descriptionInput="ngModel"
+								ngModel
+								name="description"
 								class="form-control"
 								id="description"
-								name="description"
 								rows="3"
 								placeholder="Моля, опишете накратко повредите по автомобила"
+								required
+								minlength="10"
+								[ngClass]="{
+									'is-invalid':
+										descriptionInput.invalid && descriptionInput.touched,
+									'is-valid': descriptionInput.valid
+								}"
 							></textarea>
+							<div
+								class="alert alert-danger alert-dismissible fade show"
+								*ngIf="descriptionInput.touched && descriptionInput.invalid"
+							>
+							Моля, опишете накратко повредите по автомобила
+							</div>
 						</div>
 					</div>
 				</div>
 				<div class="form-group row">
 					<div class="col-sm-10">
-						<button type="submit" class="btn btn-primary">
+						<button [disabled]="repairForm.invalid" type="submit" class="btn btn-primary">
 							Изпрати заявка
 						</button>
 					</div>
 				</div>
 			</form>
 		</div>
+	</ng-template>
 	</div>
 </div>

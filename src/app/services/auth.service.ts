@@ -32,14 +32,6 @@ export class AuthService {
 		.then(() => this.user.displayName = displayName);
 	}
 
-	// async sendEmailVerification() {
-	// 	return await this.afAuth.auth.currentUser.sendEmailVerification();
-	// }
-
-	// async sendPasswordResetEmail(passwordResetEmail: string) {
-	// 	return await this.afAuth.auth.sendPasswordResetEmail(passwordResetEmail);
-	// }
-
 	async logout() {
 		var result = await this.afAuth.auth.signOut();
 		localStorage.removeItem('user');
@@ -49,5 +41,9 @@ export class AuthService {
 	get isLoggedIn(): boolean {
 		const user = JSON.parse(localStorage.getItem('user'));
 		return user !== null;
+	}
+
+	async changePassword(newPassword: string) {
+		return await this.afAuth.auth.currentUser.updatePassword(newPassword);
 	}
 }
