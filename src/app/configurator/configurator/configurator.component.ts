@@ -1,31 +1,33 @@
 import { Component, OnInit } from '@angular/core';
-import { CurrentConfiguration, Configuration } from '../../angularmodels/configurator.model'
-import { ConfiguratorService } from '../../services/configurator.service'
+import {
+	CurrentConfiguration,
+	Configuration
+} from '../../angularmodels/configurator.model';
+import { ConfiguratorService } from '../../services/configurator.service';
 
 @Component({
-  selector: 'app-configurator',
-  templateUrl: './configurator.component.html',
-  styleUrls: ['./configurator.component.scss']
+	selector: 'app-configurator',
+	templateUrl: './configurator.component.html',
+	styleUrls: ['./configurator.component.scss']
 })
 export class ConfiguratorComponent implements OnInit {
-
-  currentConfiguration: CurrentConfiguration;
-  configurator: Configuration[];
+	currentConfiguration: CurrentConfiguration;
+	configurator: Configuration[];
   loading: boolean = false;
+  availableEngines: Array<{}>;
 
-  constructor(private configuratorService: ConfiguratorService) { }
+	constructor(private configuratorService: ConfiguratorService) {}
 
-  ngOnInit() {
-    this.loading = true;
-    this.configuratorService.getAvailableConfigurations().subscribe(data => {
-      this.loading = false;
-      this.configurator = data.map(e => {
-        return {
-          ...e.payload.doc.data() as Configuration
-        }
-      })
-      console.log(this.configurator)
-    });
-  }
-
+	ngOnInit() {
+		this.loading = true;
+		this.configuratorService.getAvailableConfigurations().subscribe(data => {
+			this.loading = false;
+			this.configurator = data.map(e => {
+				return {
+					...(e.payload.doc.data() as Configuration)
+				};
+			});
+			console.log(this.configurator);
+		});
+	}
 }
