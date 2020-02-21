@@ -14,7 +14,6 @@ export class ConfiguratorComponent implements OnInit {
 	currentConfiguration: CurrentConfiguration;
 	configurator: Configuration[];
   loading: boolean = false;
-  availableEngines: Array<{}>;
 
 	constructor(private configuratorService: ConfiguratorService) {}
 
@@ -27,7 +26,6 @@ export class ConfiguratorComponent implements OnInit {
 					...(e.payload.doc.data() as Configuration)
 				};
 			});
-			console.log(this.configurator);
 		});
 	}
 }
