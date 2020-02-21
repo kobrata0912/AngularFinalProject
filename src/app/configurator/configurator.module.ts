@@ -4,6 +4,7 @@ import { ConfiguratorComponent } from './configurator/configurator.component';
 
 
 
+
 @NgModule({
   declarations: [ConfiguratorComponent],
   imports: [

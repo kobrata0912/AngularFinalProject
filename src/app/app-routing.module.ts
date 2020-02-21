@@ -84,7 +84,7 @@ const routes: Routes = [
 		component: CarlistComponent
 	},
 	{
-		path: '*',
+		path: '**',
 		component: NotFoundComponent
 	}
 ];

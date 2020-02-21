@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { CurrentConfiguration, Configuration } from '../../angularmodels/configurator.model'
+import { ConfiguratorService } from '../../services/configurator.service'
 
 @Component({
   selector: 'app-configurator',
@@ -7,9 +9,23 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ConfiguratorComponent implements OnInit {
 
-  constructor() { }
+  currentConfiguration: CurrentConfiguration;
+  configurator: Configuration[];
+  loading: boolean = false;
 
-  ngOnInit(): void {
+  constructor(private configuratorService: ConfiguratorService) { }
+
+  ngOnInit() {
+    this.loading = true;
+    this.configuratorService.getAvailableConfigurations().subscribe(data => {
+      this.loading = false;
+      this.configurator = data.map(e => {
+        return {
+          ...e.payload.doc.data() as Configuration
+        }
+      })
+      console.log(this.configurator)
+    });
   }
 
 }

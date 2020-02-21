@@ -1,5 +1,5 @@
 <div class="container-fluid">
-	<div class="row">
+	<div class="row justify-content-center d-flex">
 		<div class="container mt-5" *ngIf="loading; else profile">
 			<div class="row">
 				<div id="loader">
@@ -101,5 +101,91 @@
                 TODO: Saved configurations
             </div>
 		</ng-template>
+	</div>
+	<div class="row justify-content-center d-flex">
+			<div class="col-lg-5 p-2 m-1 justify-content-center d-flex">
+				<div class="container">
+					<form
+						#profileForm="ngForm"
+						(ngSubmit)="submitNewPassword(profileForm.value)"
+						class="shadow-lg p-5"
+					>
+						<div
+							#passwordsGroup="ngModelGroup"
+							ngModelGroup="passwords"
+							appPasswordMatch
+						>
+							<div class="form-group row">
+								<label for="password" class="col-sm-2 col-form-label">
+									Нова парола
+								</label>
+								<div class="col-sm-10">
+									<input
+										#passwordInput="ngModel"
+										ngModel
+										name="password"
+										type="password"
+										class="form-control"
+										id="password"
+										value=""
+										placeholder="Моля, въведете нова парола"
+										[pattern]="passwordRegex"
+										[ngClass]="{
+											'is-invalid':
+												passwordInput.invalid && passwordInput.touched,
+											'is-valid': passwordInput.valid
+										}"
+										required
+										minlength="8"
+									/>
+								</div>
+							</div>
+							<div
+								class="alert alert-danger alert-dismissible fade show"
+								*ngIf="passwordInput.dirty && passwordInput.invalid"
+							>
+								Моля, въведете валидна парола!
+							</div>
+							<div class="form-group row">
+								<label for="rePassword" class="col-sm-2 col-form-label">
+									Нова парола
+								</label>
+								<div class="col-sm-10">
+									<input
+										#rePasswordInput="ngModel"
+										ngModel
+										name="rePassword"
+										type="password"
+										class="form-control"
+										id="rePassword"
+										value=""
+										placeholder="Моля, въведете пак новата парола"
+										[ngClass]="{
+											'is-invalid':
+												passwordsGroup.invalid && passwordsGroup.dirty,
+											'is-valid': passwordsGroup.valid
+										}"
+										required
+										minlength="8"
+									/>
+								</div>
+							</div>
+							<div
+								class="alert alert-danger alert-dismissible fade show"
+								*ngIf="passwordsGroup.touched && passwordsGroup.invalid"
+							>
+								Двете пароли не съвпадат!
+							</div>
+                        </div>
+                        
+                        <button [disabled]="profileForm.invalid" class="btn btn-primary">
+                            <h5>Смяна на паролата</h5>
+                        </button>
+					</form>
+				</div>
+			</div>
+			<div class="col-lg-5 p-2 m-1 border justify-content-center d-flex">
+                TODO: Saved configurations
+            </div>
 	</div>
 </div>

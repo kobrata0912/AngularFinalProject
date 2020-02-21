@@ -20,13 +20,16 @@ export class CarlistComponent implements OnInit {
 	loading: boolean = false;
 
 	ngOnInit() {
-		this.loading = true;
-		this.carlistService.getCar(this.modelName).subscribe(data => {
-			this.loading = false;
-			this.car = data.map(e => {
-				return {
-					...(e.payload.doc.data() as Car)
-				};
+		this.activatedRoute.params.subscribe(routeParams => {
+			this.modelName = routeParams.modelName;
+			this.loading = true;
+			this.carlistService.getCar(this.modelName).subscribe(data => {
+				this.loading = false;
+				this.car = data.map(e => {
+					return {
+						...(e.payload.doc.data() as Car)
+					};
+				});
 			});
 		});
 	}

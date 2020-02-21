@@ -23,6 +23,7 @@ import { NotFoundComponent } from './not-found/not-found.component';
 import { AboutUsComponent } from './about-us/about-us.component';
 import { ContactsComponent } from './contacts/contacts.component';
 import { RepairsComponent } from './repairs/repairs.component';
+import { ConfiguratorModule } from './configurator/configurator.module';
 
 @NgModule({
 	declarations: [
@@ -54,7 +55,8 @@ import { RepairsComponent } from './repairs/repairs.component';
 			preventDuplicates: true
 		}),
 		NewsModule,
-		CarmodelsModule
+		CarmodelsModule,
+		ConfiguratorModule
 	],
 	providers: [],
 	bootstrap: [AppComponent]

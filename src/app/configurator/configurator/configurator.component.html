@@ -1,1 +1,35 @@
-<p>configurator works!</p>
+<ng-template ngFor let-config [ngForOf]="configurator">
+<div class="container-fluid">
+    <div class="row justify-content-center d-flex mt-4">
+        <div name="carPicture" class="col-md-10 justify-content-center d-flex">
+            <div id="carPictures" class="carousel slide" data-ride="carousel">
+              
+                <!-- The slideshow -->
+                <div class="carousel-inner">
+                  <div class="carousel-item active">
+                  <img src="{{config.mainPicture}}" alt="Los Angeles">
+                  </div>
+                  <!-- <div class="carousel-item">
+                    <img src="chicago.jpg" alt="Chicago">
+                  </div>
+                  <div class="carousel-item">
+                    <img src="ny.jpg" alt="New York">
+                  </div> -->
+                </div>
+              
+                <!-- Left and right controls -->
+                <a class="carousel-control-prev" href="#carPictures" data-slide="prev">
+                  <span class="carousel-control-prev-icon"></span>
+                </a>
+                <a class="carousel-control-next" href="#carPictures" data-slide="next">
+                  <span class="carousel-control-next-icon"></span>
+                </a>
+              
+              </div>
+        </div>
+    </div>
+    <div class="row justify-content-center d-flex">
+
+    </div>
+</div>
+</ng-template>
