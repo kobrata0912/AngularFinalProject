@@ -1,19 +1,33 @@
-# Angular Course Final Project - Audi Unofficial App
+## Audi Unofficial Website
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.0.1.
 
-The front-end is built with Angular, SCSS provided by Bootstrap 4, and the back end is provided by Firebase.
+## Idea
+An application that every user can view car models, create hiw own car configuration, view news, inquire about repair, view company history and contacts.
 
-The app consists of the following pages:
-
-1. Home page
-2. Models page (dynamically load car model information from backend, depending on the model chosen)
-3. Configurator (TODO: dynamically create a car with specified Model, Engine, Fuel type, Transmission, Interior and Exterior specifications, etc.)
-4. Repair inquiry (submit a form with information regarding the person's names inquiring the repair, along with e-mail address, phone number, chosen service location and short description of the repair needed)
-5. News (dynamically load latest news from backend)
-6. About us (static page with short history of the company)
-7. Contacts (static page with service locations and contacts)
-8. Login (dynamic login page)
-9. Register (dynamic registration page)
-10. Profile page (dynamic page giving the user the availability to change his password, TODO: view his saved configurations so far)
-
-TODO: 
-Describe modules in README after finalization of the project, finish building module for lazy loading, create the Configurator from scratch).
+## Public part
+* Anonymus user
+  * User has access to register page.
+  * User has access to login page.
+  * User has access to news page.
+  * User has access to contacts page.
+  * User has access to car models page.
+  * User has access to about us page.
+## Private part
+* Authorized user
+  * User has access to repair inquiry page.
+  * User has access to configurator page.
+  * User has access to his own profile page.
+  * User DOES NOT have access to login page.
+  * User DOES NOT have access to register page.
+## Design
+* Bootstrap 4
+## Functionality
+* Create repair inquiry
+  * User can fill out a form and inquire about a car repair.
+* Configurator
+  * User can choose car model, and configure the car he likes. After he's done, he can save the configuration and view it later in his        profile page
+* View car models
+  * User can view different technical data regarding each model offered by the manufacturer.
+* Profile
+  * User can reset password.
+  * User can change first and last names
