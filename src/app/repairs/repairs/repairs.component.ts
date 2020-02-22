@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { RepairsService } from '../services/repairs.service';
-import { AuthService } from '../services/auth.service';
-import { NotificationService } from '../services/notification.service';
+import { RepairsService } from '../../services/repairs.service';
+import { AuthService } from '../../services/auth.service';
+import { NotificationService } from '../../services/notification.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -18,7 +18,7 @@ export class RepairsComponent implements OnInit {
 	) {}
 
 	loading: boolean = false;
-	fullNames: string = JSON.parse(localStorage.getItem('user')).displayName;
+	fullNames: string = this.authService.user.displayName;
 	userEmail: string = JSON.parse(localStorage.getItem('user')).email;
 	phoneNumberRegex = new RegExp('^[+0-9 ]{10,}$');
 

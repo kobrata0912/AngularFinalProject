@@ -37,13 +37,13 @@
 			<a class="nav-link h4" routerLink="/contacts">Контакти</a>
 		</li>
 		<li *ngIf="!isLogged" class="nav-item mx-1 shadow">
-			<a class="nav-link h4" routerLink="/login">Вход</a>
+			<a class="nav-link h4" routerLink="/user/login">Вход</a>
 		</li>
 		<li *ngIf="!isLogged" class="nav-item mx-1 shadow">
-			<a class="nav-link h4" routerLink="/register">Регистрация</a>
+			<a class="nav-link h4" routerLink="/user/register">Регистрация</a>
 		</li>
 		<li *ngIf="isLogged" class="nav-item mx-1 shadow">
-			<a class="nav-link h4" routerLink="/profile">Профил</a>
+			<a class="nav-link h4" routerLink="/user/profile">Профил</a>
 		</li>
 		<li *ngIf="isLogged" class="nav-item mx-1 shadow">
 			<a class="nav-link h4" (click)="logout()">Изход</a>

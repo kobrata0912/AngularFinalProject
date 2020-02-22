@@ -1,21 +1,21 @@
 <div class="container-fluid">
-	<div class="row justify-content-center d-flex">
-		<div class="container mt-5" *ngIf="loading; else profile">
-			<div class="row">
-				<div id="loader">
-					<div class="dot"></div>
-					<div class="dot"></div>
-					<div class="dot"></div>
-					<div class="dot"></div>
-					<div class="dot"></div>
-					<div class="dot"></div>
-					<div class="dot"></div>
-					<div class="dot"></div>
-					<div class="loading"></div>
-				</div>
+	<div class="container mt-5" *ngIf="loading; else profile">
+		<div class="row">
+			<div id="loader">
+				<div class="dot"></div>
+				<div class="dot"></div>
+				<div class="dot"></div>
+				<div class="dot"></div>
+				<div class="dot"></div>
+				<div class="dot"></div>
+				<div class="dot"></div>
+				<div class="dot"></div>
+				<div class="loading"></div>
 			</div>
 		</div>
-		<ng-template #profile>
+	</div>
+	<ng-template #profile>
+		<div class="row justify-content-center d-flex">
 			<div class="col-lg-5 p-2 m-1 justify-content-center d-flex">
 				<div class="container">
 					<form
@@ -89,25 +89,116 @@
 							>
 								Двете пароли не съвпадат!
 							</div>
-                        </div>
-                        
-                        <button [disabled]="profileForm.invalid" class="btn btn-primary">
-                            <h5>Смяна на паролата</h5>
-                        </button>
+						</div>
+
+						<button [disabled]="profileForm.invalid" class="btn btn-primary">
+							<h5>Смяна на паролата</h5>
+						</button>
 					</form>
 				</div>
 			</div>
 			<div class="col-lg-5 p-2 m-1 border justify-content-center d-flex">
-                TODO: Saved configurations
-            </div>
-		</ng-template>
-	</div>
-	<div class="row justify-content-center d-flex">
-			<div class="col-lg-5 p-2 m-1 justify-content-center d-flex">
-				TODO: Ability to change First and Last names
+				TODO: Saved configurations
 			</div>
-			<div class="col-lg-5 p-2 m-1 border justify-content-center d-flex">
-                TODO: Saved repairs inquiries
-            </div>
-	</div>
+		</div>
+		<div class="row justify-content-center d-flex">
+			<div class="col-lg-5 p-2 m-1 justify-content-center d-flex">
+				<div class="container">
+					<form
+						#namesForm="ngForm"
+						(ngSubmit)="submitNewNames(namesForm.value)"
+						class="shadow-lg p-5"
+					>
+						<div class="form-group row">
+							<label for="firstName" class="col-sm-2 col-form-label">
+								Име
+							</label>
+							<div class="col-sm-10">
+								<input
+									#firstNameInput="ngModel"
+									ngModel
+									name="firstName"
+									type="firstName"
+									class="form-control"
+									id="firstName"
+									value=""
+									placeholder="Моля, въведете име"
+									[pattern]="namesRegex"
+									[ngClass]="{
+										'is-invalid':
+											firstNameInput.invalid && firstNameInput.touched,
+										'is-valid': firstNameInput.valid
+									}"
+									required
+								/>
+							</div>
+						</div>
+						<div
+							class="alert alert-danger alert-dismissible fade show"
+							*ngIf="firstNameInput.dirty && firstNameInput.invalid"
+						>
+							Моля, въведете валиднo име!
+						</div>
+						<div class="form-group row">
+							<label for="lastName" class="col-sm-2 col-form-label">
+								Фамилия
+							</label>
+							<div class="col-sm-10">
+								<input
+									#lastNameInput="ngModel"
+									ngModel
+									name="lastName"
+									type="password"
+									class="form-control"
+									id="lastName"
+									value=""
+									placeholder="Моля, въведете фамилия"
+									[ngClass]="{
+										'is-invalid':
+											lastNameInput.invalid && lastNameInput.touched,
+										'is-valid': lastNameInput.valid
+									}"
+									required
+								/>
+							</div>
+						</div>
+						<div
+							class="alert alert-danger alert-dismissible fade show"
+							*ngIf="lastNameInput.dirty && lastNameInput.invalid"
+						>
+							Моля, въведете валиднo име!
+						</div>
+						<button [disabled]="namesForm.invalid" class="btn btn-primary">
+							<h5>Смяна на имената</h5>
+						</button>
+					</form>
+				</div>
+			</div>
+			<div class="col-lg-5 p-2 m-1 border">
+				<div class="container-fluid">
+					<div class="row ">
+						<div class="col-lg-12 justify-content-center d-flex">
+							<h4>Вашите заявки за сервизно обслужване</h4>
+						</div>
+					</div>
+					<div class="row" *ngFor="let repair of repairRequests; let i = index">
+						<div class="col-lg-12">
+							<div class="container-fluid border shadow-sm my-2">
+								<div class="row">
+									<div class="col-lg-12 justify-content-center d-flex">
+										<h5>{{ i + 1 }}. Заявка за сервиз {{ repair.location }}</h5>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-lg-12 justify-content-center d-flex">
+										<h5>Описание: {{ repair.description }}</h5>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</ng-template>
 </div>

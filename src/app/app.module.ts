@@ -12,36 +12,25 @@ import { AppRoutingModule } from './app-routing.module';
 import { FormsModule } from '@angular/forms';
 import { CoreModule } from './core/core.module';
 import { SharedModule } from './shared/shared.module';
-import { UserModule } from './user/user.module';
-import { NewsModule } from './news/news.module';
-import { CarmodelsModule } from './carmodels/carmodels.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
-import { LoginComponent } from './login/login.component';
-import { RegisterComponent } from './register/register.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { AboutUsComponent } from './about-us/about-us.component';
 import { ContactsComponent } from './contacts/contacts.component';
-import { RepairsComponent } from './repairs/repairs.component';
-import { ConfiguratorModule } from './configurator/configurator.module';
 
 @NgModule({
 	declarations: [
 		AppComponent,
-		LoginComponent,
-		RegisterComponent,
 		NotFoundComponent,
 		HomeComponent,
 		AboutUsComponent,
 		ContactsComponent,
-		RepairsComponent
 	],
 	imports: [
 		BrowserModule,
 		AppRoutingModule,
 		SharedModule,
 		CoreModule,
-		UserModule,
 		HttpClientModule,
 		FormsModule,
 		AngularFireModule.initializeApp(environment.firebase),
@@ -53,10 +42,7 @@ import { ConfiguratorModule } from './configurator/configurator.module';
 			timeOut: 3000,
 			positionClass: 'toast-bottom-right',
 			preventDuplicates: true
-		}),
-		NewsModule,
-		CarmodelsModule,
-		ConfiguratorModule
+		})
 	],
 	providers: [],
 	bootstrap: [AppComponent]

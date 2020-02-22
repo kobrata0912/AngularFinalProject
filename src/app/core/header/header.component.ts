@@ -4,8 +4,7 @@ import { Component, OnInit } from '@angular/core';
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: [
-    './header.component.scss',
-    '../../../../node_modules/bootstrap/dist/css/bootstrap.min.css'
+    './header.component.scss'
   ]
 })
 export class HeaderComponent implements OnInit {
